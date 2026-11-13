@@ -55,7 +55,7 @@ class AccommodationController extends Controller
     {
         $keyword = $request->input('keyword');
         $categoryId = $request->input('category_id') ?? $request->input('category');
-        $facilityId = $request->input('facility_id') ?? $request->input('facility');
+        $facilityIds = (array) $request->input('facility_id', []);
         $minPrice = $request->input('min_price');
         $maxPrice = $request->input('max_price');
 
@@ -75,16 +75,10 @@ class AccommodationController extends Controller
                     });
                 }
             })
-            ->when($facilityId, function ($q, $facilityId) {
-                if (is_numeric($facilityId)) {
-                    $q->whereHas('facilities', function ($sub) use ($facilityId) {
-                        $sub->where('facilities.id', $facilityId);
-                    });
-                } else {
-                    $q->whereHas('facilities', function ($sub) use ($facilityId) {
-                        $sub->where('facilities.name', 'like', "%{$facilityId}%");
-                    });
-                }
+            ->when(!empty($facilityIds), function ($q) use ($facilityIds) {
+                $q->whereHas('facilities', function ($sub) use ($facilityIds) {
+                    $sub->whereIn('facilities.id', $facilityIds);
+                });
             })
             ->when($minPrice, function ($q, $minPrice) {
                 $q->where('price', '>=', (float) $minPrice);

@@ -29,447 +29,526 @@
     </div>
 
     <!-- ==================== DAFTAR SEMUA PENGINAPAN ==================== -->
-    <section class="reveal-on-scroll pt-24 pb-12 sm:pb-16 lg:pb-20 bg-gradient-to-b from-[#E6F4FF] via-[#F7F9FC] to-white dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 min-h-screen relative overflow-hidden">
+    <section class="reveal-on-scroll pt-20 pb-14 sm:pb-20 bg-[#F4F8FC] dark:bg-gray-900 min-h-screen relative overflow-hidden">
 
-        {{-- Background decorative blobs --}}
-        <div class="absolute top-0 right-0 w-64 h-64 sm:w-96 sm:h-96 bg-[#0194F3]/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 w-56 h-56 sm:w-80 sm:h-80 bg-[#33ADFF]/10 rounded-full blur-3xl pointer-events-none"></div>
+        {{-- Background dekoratif pola halus --}}
         <div class="absolute inset-0 opacity-[0.03] pointer-events-none"
-            style="background-image: radial-gradient(circle, #0194F3 1.5px, transparent 1.5px); background-size: 24px 24px;">
-        </div>
+            style="background-image: radial-gradient(circle, #0194F3 1.5px, transparent 1.5px); background-size: 24px 24px;"></div>
 
-        {{-- ===================== CONTAINER UTAMA ===================== --}}
-        <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+        {{-- ===================== CONTAINER UTAMA (FULL WIDTH) ===================== --}}
+        <div class="w-full max-w-none px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10">
 
-            {{-- ===================== HEADER SECTION ===================== --}}
-            <div
-                class="reveal-on-scroll flex flex-col sm:flex-row sm:items-end sm:justify-between mb-8 sm:mb-10 gap-4 sm:gap-6 border-b border-gray-300 dark:border-gray-600 pb-4">
-                <div class="max-w-xl">
-                    <span class="inline-block text-[#0194F3] text-xs sm:text-sm font-bold uppercase tracking-wider mb-1">
-                        — Direktori
-                    </span>
-                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0F294D] dark:text-white leading-tight mb-2">
-                        Katalog <span class="text-[#0194F3]">Akomodasi</span>
-                    </h1>
-                    <p class="text-sm text-gray-600 dark:text-gray-400">
-                        Akses beragam opsi penginapan berkualitas untuk menunjang kenyamanan Anda
-                    </p>
+            {{-- ===================== 1. HEADER / HERO KATALOG ===================== --}}
+            <div class="reveal-on-scroll relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#0064D2] via-[#0194F3] to-[#25B4F8] px-6 py-7 sm:px-10 sm:py-9 mb-6 shadow-lg shadow-blue-900/10 text-white">
+                {{-- Ornamen latar visual --}}
+                <div class="absolute -right-12 -top-16 w-72 h-72 rounded-full border-[30px] border-white/10 pointer-events-none"></div>
+                <div class="absolute right-28 -bottom-24 w-60 h-60 rounded-full bg-white/10 blur-2xl pointer-events-none"></div>
+                
+                {{-- Siluet arsitektur / landmark Jogja halus di sisi kanan banner --}}
+                <div class="absolute right-4 bottom-0 opacity-20 hidden md:block pointer-events-none">
+                    <svg width="220" height="120" viewBox="0 0 220 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M110 5L118 35H102L110 5Z" fill="white" />
+                        <rect x="106" y="35" width="8" height="60" fill="white" />
+                        <rect x="98" y="95" width="24" height="25" rx="3" fill="white" />
+                        <path d="M60 65L75 50L90 65V120H60V65Z" fill="white" />
+                        <path d="M130 65L145 50L160 65V120H130V65Z" fill="white" />
+                        <circle cx="110" cy="5" r="4" fill="#FFE600" />
+                    </svg>
                 </div>
-                <a href="{{ route('landingpage') }}#penginapan"
-                    class="inline-flex items-center gap-2 px-4 py-2 rounded-sm bg-white dark:bg-gray-800 text-[#0194F3] dark:text-[#33ADFF] border border-gray-300 dark:border-gray-600 hover:bg-[#0194F3] hover:text-white transition-all shadow-sm font-bold text-xs sm:text-sm group self-start sm:self-auto uppercase tracking-wide">
-                    <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
-                    <span>Kembali</span>
-                </a>
-            </div>
 
-            {{-- ===================== SEARCH & FILTER BAR ===================== --}}
-            <div class="reveal-on-scroll bg-white dark:bg-gray-800 rounded-md shadow-sm p-4 mb-8 border border-gray-300 dark:border-gray-600">
-                <form action="{{ route('accommodationlanding.semua') }}" method="GET" class="flex flex-col lg:flex-row items-stretch lg:items-center gap-3">
-
-                    {{-- 1. Input Nama / Lokasi --}}
-                    <div class="flex-1 relative flex items-center bg-gray-50 dark:bg-gray-700/50 rounded-sm px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 focus-within:border-[#0194F3] focus-within:ring-1 focus-within:ring-[#0194F3] transition-all">
-                        <i data-lucide="map-pin" class="w-4 h-4 text-gray-400 mr-2.5 flex-shrink-0"></i>
-                        <div class="flex-1">
-                            <label class="block text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-0.5">Cari Penginapan</label>
-                            <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="Nama Penginapan"
-                                class="w-full p-0 border-0 bg-transparent text-sm text-[#0F294D] dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-0 font-medium">
-                        </div>
-                    </div>
-
-                    {{-- 2. Custom Dropdown Kategori --}}
-                    <div class="w-full lg:w-48 xl:w-52 relative bg-gray-50 dark:bg-gray-700/50 rounded-sm px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 focus-within:border-[#0194F3] focus-within:ring-1 focus-within:ring-[#0194F3] transition-all" id="heroCategoryWrapDesktop">
-                        <div class="flex items-center gap-1.5 mb-0.5">
-                            <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-gray-400"></i>
-                            <label class="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Kategori</label>
-                        </div>
-
-                        {{-- Hidden native select (menyimpan value untuk form) --}}
-                        <select name="category_id" id="heroCategoryDesktop" class="sr-only" tabindex="-1">
-                            <option value="">Semua Kategori</option>
-                            @if(isset($categories) && $categories->count())
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" {{ (string) request('category_id') === (string) $category->id || request('category') === $category->slug ? 'selected' : '' }}>
-                                        {{ $category->name }}
-                                    </option>
-                                @endforeach
-                            @endif
-                        </select>
-
-                        {{-- Tombol Trigger --}}
-                        <button type="button" id="heroCategoryTriggerDesktop"
-                            class="w-full flex items-center justify-between gap-1 text-sm font-bold text-[#0F294D] dark:text-white bg-transparent border-0 p-0 cursor-pointer focus:outline-none">
-                            <span id="heroCategoryLabelDesktop" class="truncate">
-                                @php
-                                    $selectedCatName = 'Semua Kategori';
-                                    if(isset($categories) && request('category_id')) {
-                                        $foundCat = $categories->firstWhere('id', request('category_id'));
-                                        if($foundCat) $selectedCatName = $foundCat->name;
-                                    } elseif(isset($categories) && request('category')) {
-                                        $foundCat = $categories->firstWhere('slug', request('category'));
-                                        if($foundCat) $selectedCatName = $foundCat->name;
-                                    }
-                                @endphp
-                                {{ $selectedCatName }}
-                            </span>
-                            <i data-lucide="chevron-down" id="heroCategoryChevronDesktop" class="w-3.5 h-3.5 text-gray-400 flex-shrink-0 transition-transform duration-200"></i>
-                        </button>
-
-                        {{-- Panel Dropdown --}}
-                        <div id="heroCategoryPanelDesktop"
-                            class="hidden absolute left-0 top-full mt-2 z-50 w-52 bg-white dark:bg-gray-800 rounded-sm shadow-xl border border-gray-300 dark:border-gray-600 overflow-hidden">
-                            <ul class="py-1 max-h-56 overflow-y-auto text-sm">
-                                <li>
-                                    <button type="button" data-value="" data-label="Semua Kategori"
-                                        class="hero-cat-opt-desktop w-full text-left px-4 py-2.5 font-bold text-[#0F294D] dark:text-white hover:bg-[#E6F4FF] dark:hover:bg-[#0194F3]/20 hover:text-[#0194F3] dark:hover:text-[#33ADFF] transition-colors flex items-center gap-2 {{ !request('category_id') && !request('category') ? 'is-selected bg-[#E6F4FF] dark:bg-[#0194F3]/20' : '' }}">
-                                        <i data-lucide="check" class="w-3.5 h-3.5 text-[#0194F3] check-icon {{ !request('category_id') && !request('category') ? '' : 'opacity-0' }}"></i>
-                                        Semua Kategori
-                                    </button>
-                                </li>
-                                @if(isset($categories) && $categories->count())
-                                    @foreach($categories as $category)
-                                    @php
-                                        $isCatSelected = (string) request('category_id') === (string) $category->id || request('category') === $category->slug;
-                                    @endphp
-                                    <li>
-                                        <button type="button" data-value="{{ $category->id }}" data-label="{{ $category->name }}"
-                                            class="hero-cat-opt-desktop w-full text-left px-4 py-2.5 font-bold text-[#0F294D] dark:text-white hover:bg-[#E6F4FF] dark:hover:bg-[#0194F3]/20 hover:text-[#0194F3] dark:hover:text-[#33ADFF] transition-colors flex items-center gap-2 {{ $isCatSelected ? 'is-selected bg-[#E6F4FF] dark:bg-[#0194F3]/20' : '' }}">
-                                            <i data-lucide="check" class="w-3.5 h-3.5 text-[#0194F3] check-icon {{ $isCatSelected ? '' : 'opacity-0' }}"></i>
-                                            {{ $category->name }}
-                                        </button>
-                                    </li>
-                                    @endforeach
-                                @endif
-                            </ul>
-                        </div>
-                    </div>
-
-                    {{-- 3. Custom Dropdown Fasilitas --}}
-                    <div class="w-full lg:w-48 xl:w-52 relative bg-gray-50 dark:bg-gray-700/50 rounded-sm px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 focus-within:border-[#0194F3] focus-within:ring-1 focus-within:ring-[#0194F3] transition-all" id="heroFacilityWrapDesktop">
-                        <div class="flex items-center gap-1.5 mb-0.5">
-                            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-gray-400"></i>
-                            <label class="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Fasilitas</label>
-                        </div>
-
-                        {{-- Hidden native select (menyimpan value untuk form) --}}
-                        <select name="facility_id" id="heroFacilityDesktop" class="sr-only" tabindex="-1">
-                            <option value="">Semua Fasilitas</option>
-                            @if(isset($facilities) && $facilities->count())
-                                @foreach($facilities as $facility)
-                                    <option value="{{ $facility->id }}" {{ (string) request('facility_id') === (string) $facility->id || request('facility') === $facility->name ? 'selected' : '' }}>
-                                        {{ $facility->name }}
-                                    </option>
-                                @endforeach
-                            @endif
-                        </select>
-
-                        {{-- Tombol Trigger --}}
-                        <button type="button" id="heroFacilityTriggerDesktop"
-                            class="w-full flex items-center justify-between gap-1 text-sm font-bold text-[#0F294D] dark:text-white bg-transparent border-0 p-0 cursor-pointer focus:outline-none">
-                            <span id="heroFacilityLabelDesktop" class="truncate">
-                                @php
-                                    $selectedFacName = 'Semua Fasilitas';
-                                    if(isset($facilities) && request('facility_id')) {
-                                        $foundFac = $facilities->firstWhere('id', request('facility_id'));
-                                        if($foundFac) $selectedFacName = $foundFac->name;
-                                    } elseif(isset($facilities) && request('facility')) {
-                                        $foundFac = $facilities->firstWhere('name', request('facility'));
-                                        if($foundFac) $selectedFacName = $foundFac->name;
-                                    }
-                                @endphp
-                                {{ $selectedFacName }}
-                            </span>
-                            <i data-lucide="chevron-down" id="heroFacilityChevronDesktop" class="w-3.5 h-3.5 text-gray-400 flex-shrink-0 transition-transform duration-200"></i>
-                        </button>
-
-                        {{-- Panel Dropdown --}}
-                        <div id="heroFacilityPanelDesktop"
-                            class="hidden absolute left-0 top-full mt-2 z-50 w-52 bg-white dark:bg-gray-800 rounded-sm shadow-xl border border-gray-300 dark:border-gray-600 overflow-hidden">
-                            <ul class="py-1 max-h-56 overflow-y-auto text-sm">
-                                <li>
-                                    <button type="button" data-value="" data-label="Semua Fasilitas"
-                                        class="hero-fac-opt-desktop w-full text-left px-4 py-2.5 font-bold text-[#0F294D] dark:text-white hover:bg-[#E6F4FF] dark:hover:bg-[#0194F3]/20 hover:text-[#0194F3] dark:hover:text-[#33ADFF] transition-colors flex items-center gap-2 {{ !request('facility_id') && !request('facility') ? 'is-selected bg-[#E6F4FF] dark:bg-[#0194F3]/20' : '' }}">
-                                        <i data-lucide="check" class="w-3.5 h-3.5 text-[#0194F3] check-icon {{ !request('facility_id') && !request('facility') ? '' : 'opacity-0' }}"></i>
-                                        Semua Fasilitas
-                                    </button>
-                                </li>
-                                @if(isset($facilities) && $facilities->count())
-                                    @foreach($facilities as $facility)
-                                    @php
-                                        $isFacSelected = (string) request('facility_id') === (string) $facility->id || request('facility') === $facility->name;
-                                    @endphp
-                                    <li>
-                                        <button type="button" data-value="{{ $facility->id }}" data-label="{{ $facility->name }}"
-                                            class="hero-fac-opt-desktop w-full text-left px-4 py-2.5 font-bold text-[#0F294D] dark:text-white hover:bg-[#E6F4FF] dark:hover:bg-[#0194F3]/20 hover:text-[#0194F3] dark:hover:text-[#33ADFF] transition-colors flex items-center gap-2 {{ $isFacSelected ? 'is-selected bg-[#E6F4FF] dark:bg-[#0194F3]/20' : '' }}">
-                                            <i data-lucide="check" class="w-3.5 h-3.5 text-[#0194F3] check-icon {{ $isFacSelected ? '' : 'opacity-0' }}"></i>
-                                            {{ $facility->name }}
-                                        </button>
-                                    </li>
-                                    @endforeach
-                                @endif
-                            </ul>
-                        </div>
-                    </div>
-
-                    {{-- 3. Filter Harga Maksimal --}}
-                    <div class="w-full lg:w-64 relative bg-gray-50 dark:bg-gray-700/50 rounded-sm px-3.5 py-2.5 border border-gray-300 dark:border-gray-600 focus-within:border-[#0194F3] focus-within:ring-1 focus-within:ring-[#0194F3] transition-all">
-                        <div class="flex items-center justify-between mb-1">
-                            <label class="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Harga Max/malam</label>
-                            <span id="pagePricePreview" class="text-xs font-bold text-[#0194F3] dark:text-[#33ADFF]">
-                                @if(request('max_price') && (float) request('max_price') < 10000000 && (float) request('max_price') > 50000)
-                                    s/d Rp {{ number_format(request('max_price'), 0, ',', '.') }}
-                                @else
-                                    Hingga 10 jt
-                                @endif
-                            </span>
-                        </div>
-                        <input type="range" name="max_price" id="pagePriceSlider" min="50000" max="10000000" step="50000"
-                            value="{{ request('max_price') && (float) request('max_price') < 10000000 ? request('max_price') : 10000000 }}"
-                            class="w-full h-1.5 bg-gray-200 dark:bg-gray-600 rounded-sm appearance-none cursor-pointer accent-[#0194F3]">
-                    </div>
-
-                    {{-- 4. Action Buttons --}}
-                    <div class="flex items-center gap-2">
-                        <button type="submit"
-                            class="flex-1 lg:flex-none inline-flex items-center justify-center gap-2 bg-[#0194F3] hover:bg-[#0064D2] text-white px-5 py-3 rounded-sm font-bold text-sm shadow-sm transition-all cursor-pointer">
-                            <i data-lucide="search" class="w-4 h-4"></i>
-                            <span>Cari</span>
-                        </button>
-
-                        @if(request()->hasAny(['keyword', 'category_id', 'category', 'facility_id', 'facility', 'max_price', 'min_price']))
-                            <a href="{{ route('accommodationlanding.semua') }}" title="Reset Filter"
-                                class="inline-flex items-center justify-center p-3 rounded-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-300 transition-colors border border-gray-300 dark:border-gray-600">
-                                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
-                            </a>
-                        @endif
-                    </div>
-                </form>
-
-                {{-- Active Filter Tags & Count --}}
-                @if(request()->hasAny(['keyword', 'category_id', 'category', 'facility_id', 'facility', 'max_price', 'min_price']))
-                    @php
-    $activeCat = null;
-    if (isset($categories)) {
-        if (request('category_id')) {
-            $activeCat = $categories->firstWhere('id', request('category_id'));
-        } elseif (request('category')) {
-            $activeCat = $categories->firstWhere('slug', request('category'));
-        }
-    }
-    $activeFac = null;
-    if (isset($facilities)) {
-        if (request('facility_id')) {
-            $activeFac = $facilities->firstWhere('id', request('facility_id'));
-        } elseif (request('facility')) {
-            $activeFac = $facilities->firstWhere('name', request('facility'));
-        }
-    }
-                    @endphp
-                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex flex-wrap items-center justify-between gap-3 text-xs">
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wide">Filter aktif:</span>
-                            @if(request('keyword'))
-                                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-sm bg-[#E6F4FF] dark:bg-[#0194F3]/20 text-[#0194F3] dark:text-[#33ADFF] font-bold border border-[#B3E0FF] dark:border-[#0194F3]/30">
-                                    "{{ request('keyword') }}"
-                                </span>
-                            @endif
-                            @if($activeCat)
-                                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-sm bg-[#E6F4FF] dark:bg-[#0194F3]/20 text-[#0194F3] dark:text-[#33ADFF] font-bold border border-[#B3E0FF] dark:border-[#0194F3]/30">
-                                    Kategori: {{ $activeCat->name }}
-                                </span>
-                            @endif
-                            @if($activeFac)
-                                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-sm bg-[#E6F4FF] dark:bg-[#0194F3]/20 text-[#0194F3] dark:text-[#33ADFF] font-bold border border-[#B3E0FF] dark:border-[#0194F3]/30">
-                                    Fasilitas: {{ $activeFac->name }}
-                                </span>
-                            @endif
-                            @if(request('max_price') && (float) request('max_price') < 10000000 && (float) request('max_price') > 50000)
-                                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-sm bg-[#E6F4FF] dark:bg-[#0194F3]/20 text-[#0194F3] dark:text-[#33ADFF] font-bold border border-[#B3E0FF] dark:border-[#0194F3]/30">
-                                    Max: Rp {{ number_format(request('max_price'), 0, ',', '.') }}
-                                </span>
-                            @endif
-                            <a href="{{ route('accommodationlanding.semua') }}" class="text-red-500 hover:text-red-600 hover:underline font-bold ml-1 flex items-center gap-1">
-                                <i data-lucide="x" class="w-3 h-3"></i> Hapus semua
-                            </a>
-                        </div>
-                        <span class="text-gray-500 dark:text-gray-400 font-medium">
-                            Ditemukan <strong class="text-[#0F294D] dark:text-white">{{ $accommodations->total() }}</strong> penginapan
+                <div class="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+                    <div class="max-w-2xl">
+                        <span class="inline-flex items-center gap-2 text-blue-100 text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-2">
+                            <span class="w-6 h-0.5 bg-blue-100"></span> DIREKTORI
                         </span>
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white leading-tight mb-2">
+                            Katalog <span class="text-[#FFE600] drop-shadow-sm">Akomodasi</span>
+                        </h1>
+                        <p class="text-xs sm:text-sm md:text-base text-blue-50/95 leading-relaxed">
+                            Akses beragam opsi penginapan berkualitas untuk menunjang kenyamanan Anda
+                        </p>
                     </div>
-                @endif
+
+                    <a href="{{ route('landingpage') }}#penginapan"
+                        class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white text-[#0194F3] hover:bg-blue-50 transition-all shadow-md font-bold text-xs sm:text-sm self-start sm:self-center flex-shrink-0">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        <span>Kembali</span>
+                    </a>
+                </div>
             </div>
 
-            {{-- ===================== GRID PENGINAPAN ===================== --}}
-            @if($accommodations->count() > 0)
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="accommodationGrid">
-                    @foreach($accommodations as $accommodation)
-                        @php
-        $statusColors = [
-            'Available' => ['bg-[#00DD73]', 'Tersedia'],
-            'Full' => ['bg-red-500', 'Tidak Tersedia'],
-            'Maintenance' => ['bg-yellow-500', 'Maintenance'],
-        ];
-        $status = $statusColors[$accommodation->status] ?? ['bg-gray-500', $accommodation->status];
-        $isAvailable = $accommodation->status === 'Available';
+            {{-- ===================== 2. BREADCRUMB ===================== --}}
+            <nav class="reveal-on-scroll flex flex-wrap items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-6" aria-label="Breadcrumb">
+                <a href="{{ route('landingpage') }}" class="inline-flex items-center gap-1.5 text-[#0194F3] hover:underline font-medium">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                </a>
+                <span class="text-gray-400">/</span>
+                <span class="text-gray-600 dark:text-gray-300 font-medium">Cari Penginapan</span>
+                <span class="text-gray-400">/</span>
+                <span class="text-gray-900 dark:text-white font-semibold">Katalog Akomodasi</span>
+            </nav>
 
-        // ====== RATING ======
-        if (isset($accommodation->avg_rating) || isset($accommodation->total_ratings)) {
-            $avgRating = round($accommodation->avg_rating ?? 0, 1);
-            $reviewCount = $accommodation->total_ratings ?? 0;
-        } elseif ($accommodation->relationLoaded('ratings')) {
-            $avgRating = $accommodation->ratings->count() ? round($accommodation->ratings->avg('bintang'), 1) : 0;
-            $reviewCount = $accommodation->ratings->count();
-        } else {
-            $avgRating = round($accommodation->ratings()->avg('bintang') ?? 0, 1);
-            $reviewCount = $accommodation->ratings()->count();
-        }
+            {{-- Tombol Toggle Filter untuk Mobile --}}
+            <div class="lg:hidden mb-4">
+                <button type="button" id="mobileFilterToggle"
+                    class="w-full flex items-center justify-between px-4 py-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm font-bold text-sm text-[#0F294D] dark:text-white">
+                    <span class="flex items-center gap-2">
+                        <i data-lucide="filter" class="w-4 h-4 text-[#0194F3]"></i>
+                        <span>Filter & Pencarian Penginapan</span>
+                    </span>
+                    <i data-lucide="chevron-down" id="mobileFilterChevron" class="w-4 h-4 text-gray-400 transition-transform"></i>
+                </button>
+            </div>
 
-        // ====== FASILITAS ======
-        $facilitiesData = $accommodation->relationLoaded('facilities')
-            ? $accommodation->facilities
-            : $accommodation->facilities()->get();
-                        @endphp
+            {{-- ===================== 3. KONTEN DUA KOLOM: SIDEBAR FILTER & GRID ===================== --}}
+            <div class="flex flex-col lg:flex-row items-start gap-6 lg:gap-7">
 
-                        <div class="accommodation-card reveal-on-scroll bg-white dark:bg-gray-800 rounded-md overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-300 dark:border-gray-600 hover:border-[#0194F3] group flex flex-col {{ !$isAvailable ? 'opacity-75' : '' }}"
-                            data-price="{{ $accommodation->price }}">
+                {{-- ==================== SIDEBAR FILTER PENCARIAN (KIRI) ==================== --}}
+                <aside id="sidebarFilterWrap" class="hidden lg:block w-full lg:w-64 xl:w-72 flex-shrink-0">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl p-5 sm:p-6 border border-gray-200 dark:border-gray-700 shadow-sm sticky top-24">
 
-                            {{-- BAGIAN GAMBAR --}}
-                            <div class="relative overflow-hidden flex-shrink-0 border-b border-gray-200 dark:border-gray-700">
-                                @if($accommodation->thumbnail)
-                                    <img src="{{ asset($accommodation->thumbnail) }}" alt="{{ $accommodation->title }}"
-                                        class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500 {{ !$isAvailable ? 'grayscale' : '' }}">
-                                @else
-                                    <img src="{{ asset('landingpage/kamar.jpg') }}" alt="{{ $accommodation->title }}"
-                                        class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500 {{ !$isAvailable ? 'grayscale' : '' }}">
-                                @endif
+                        {{-- Judul Sidebar Filter --}}
+                        <div class="flex items-center justify-between pb-4 mb-5 border-b border-gray-100 dark:border-gray-700">
+                            <h2 class="flex items-center gap-2 text-base font-extrabold text-[#0F294D] dark:text-white">
+                                <i data-lucide="filter" class="w-4 h-4 text-[#0194F3]"></i>
+                                <span>Filter Pencarian</span>
+                            </h2>
+                            @if(request()->hasAny(['keyword', 'category_id', 'category', 'facility_id', 'facility', 'max_price', 'min_price']))
+                                <a href="{{ route('accommodationlanding.semua') }}"
+                                    class="text-xs font-bold text-red-500 hover:text-red-600 hover:underline flex items-center gap-1"
+                                    title="Reset semua filter">
+                                    <i data-lucide="rotate-ccw" class="w-3 h-3"></i>
+                                    <span>Reset</span>
+                                </a>
+                            @endif
+                        </div>
 
-                                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none"></div>
+                        <form action="{{ route('accommodationlanding.semua') }}" method="GET" id="sidebarFilterForm" class="space-y-6">
 
-                                {{-- RATING BADGE --}}
-                                <div class="absolute top-3 left-3 inline-flex items-center gap-1 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm px-2.5 py-1 rounded-sm shadow-sm border border-gray-200 dark:border-gray-600">
-                                    @if($reviewCount > 0)
-                                        <i data-lucide="star" class="w-3.5 h-3.5 text-[#FFD700]" style="fill:#FFD700;"></i>
-                                        <span class="text-xs font-bold text-[#0F294D] dark:text-white">{{ number_format($avgRating, 1) }}</span>
-                                        <span class="text-[10px] text-gray-500 dark:text-gray-400">({{ $reviewCount }})</span>
-                                    @else
-                                        <i data-lucide="star" class="w-3.5 h-3.5 text-gray-400"></i>
-                                        <span class="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase">Baru</span>
-                                    @endif
+                            {{-- 1. Input Pencarian Nama Penginapan / Lokasi --}}
+                            <div>
+                                <label for="sidebarKeyword" class="block text-xs font-extrabold text-[#0F294D] dark:text-white uppercase tracking-wider mb-2">
+                                    Cari Penginapan
+                                </label>
+                                <div class="relative flex items-center">
+                                    <input type="text" name="keyword" id="sidebarKeyword" value="{{ request('keyword') }}"
+                                        placeholder="Nama penginapan..."
+                                        class="w-full pl-9 pr-3.5 py-2.5 bg-gray-50 dark:bg-gray-700/60 border border-gray-200 dark:border-gray-600 rounded-xl text-xs sm:text-sm text-[#0F294D] dark:text-white placeholder-gray-400 focus:outline-none focus:border-[#0194F3] focus:ring-1 focus:ring-[#0194F3] transition-all">
+                                    <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3 pointer-events-none"></i>
                                 </div>
-
-                                {{-- STATUS BADGE --}}
-                                <span class="absolute top-3 right-3 {{ $status[0] }} text-white px-2.5 py-1 rounded-sm text-[10px] font-bold uppercase shadow-sm tracking-wide">
-                                    {{ $status[1] }}
-                                </span>
-
-                                {{-- KATEGORI --}}
-                                <span class="absolute bottom-3 left-3 bg-[#0194F3] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-sm">
-                                    {{ $accommodation->category->name ?? 'Penginapan' }}
-                                </span>
                             </div>
 
-                            {{-- BAGIAN KONTEN --}}
-                            <div class="p-4 flex flex-col flex-1">
-                                <h3 class="font-bold text-[#0F294D] dark:text-white text-base mb-1.5 truncate group-hover:text-[#0194F3] transition-colors">
-                                    {{ $accommodation->title }}
+                            {{-- 2. Kategori Penginapan (List Checkbox / Radio) --}}
+                            <div>
+                                <h3 class="text-xs font-extrabold text-[#0F294D] dark:text-white uppercase tracking-wider mb-2.5">
+                                    Kategori
                                 </h3>
-                                <p class="text-gray-500 dark:text-gray-400 text-[11px] sm:text-xs mb-3 flex items-center gap-1.5 truncate">
-                                    <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#0194F3] flex-shrink-0"></i>
-                                    {{ Str::limit($accommodation->address, 35) }}
-                                </p>
+                                <div class="space-y-1.5 max-h-48 overflow-y-auto pr-1">
+                                    {{-- Opsi Semua Kategori --}}
+                                    <label class="flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer text-xs sm:text-sm text-gray-700 dark:text-gray-300 transition-colors">
+                                        <input type="radio" name="category_id" value=""
+                                            {{ !request('category_id') && !request('category') ? 'checked' : '' }}
+                                            class="w-4 h-4 text-[#0194F3] border-gray-300 dark:border-gray-600 focus:ring-[#0194F3]">
+                                        <span class="font-medium">Semua Kategori</span>
+                                    </label>
 
-                                {{-- FASILITAS DINAMIS --}}
-                                <div class="flex flex-wrap items-center gap-1.5 mb-4 h-8">
-                                    @if($facilitiesData->count() > 0)
-                                        @foreach($facilitiesData->take(5) as $facility)
-                                            <div class="inline-flex items-center justify-center w-7 h-7 bg-gray-100 dark:bg-gray-700 rounded-sm border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300" title="{{ $facility->name }}">
-                                                @php
-                $iconRaw = $facility->icon;
-                $iconLucide = $iconRaw && preg_match('/^[a-z0-9-]+$/i', $iconRaw);
-                $iconSvg = $iconRaw && (Str::startsWith($iconRaw, ['M', 'm']) || Str::startsWith($iconRaw, '<'));
-                $iconEmoji = $iconRaw && !$iconLucide && !$iconSvg;
-                                                @endphp
+                                    @if(isset($categories) && $categories->count())
+                                        @foreach($categories as $category)
+                                            @php
+                                                $isCatSelected = (string) request('category_id') === (string) $category->id || request('category') === $category->slug;
+                                            @endphp
+                                            <label class="flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer text-xs sm:text-sm text-gray-700 dark:text-gray-300 transition-colors">
+                                                <input type="radio" name="category_id" value="{{ $category->id }}"
+                                                    {{ $isCatSelected ? 'checked' : '' }}
+                                                    class="w-4 h-4 text-[#0194F3] border-gray-300 dark:border-gray-600 focus:ring-[#0194F3]">
+                                                <span class="font-medium truncate">{{ $category->name }}</span>
+                                            </label>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
 
-                                                @if($iconLucide)
-                                                    <i data-lucide="{{ $iconRaw }}" class="w-3.5 h-3.5"></i>
-                                                @elseif($iconSvg)
-                                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $iconRaw }}" />
-                                                    </svg>
-                                                @elseif($iconEmoji)
-                                                    <span class="text-xs leading-none">{{ $iconRaw }}</span>
+                            {{-- 3. Fasilitas (List Checkbox / Radio) --}}                       
+                        <div>
+                            <h3 class="text-xs font-extrabold text-[#0F294D] dark:text-white uppercase tracking-wider mb-2.5">
+                                Fasilitas
+                            </h3>
+
+                            <div class="space-y-1.5 max-h-48 overflow-y-auto pr-1">
+                                @php
+                                    $selectedFacilities = (array) request('facility_id', []);
+                                @endphp
+
+                                @foreach($facilities as $facility)
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            name="facility_id[]"
+                                            value="{{ $facility->id }}"
+                                            {{ in_array((string) $facility->id, array_map('strval', $selectedFacilities), true) ? 'checked' : '' }}
+                                            class="rounded border-gray-300 text-[#0194F3] focus:ring-[#0194F3]"
+                                        >
+                                        <span>{{ $facility->name }}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+
+
+                            {{-- 4. Filter Harga Maksimal (Slider) --}}
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-xs font-extrabold text-[#0F294D] dark:text-white uppercase tracking-wider">
+                                        Harga Maksimal
+                                    </label>
+                                    <span id="sidebarPricePreview" class="text-xs font-bold text-[#0194F3] dark:text-[#33ADFF]">
+                                        @if(request('max_price') && (float) request('max_price') < 10000000 && (float) request('max_price') > 50000)
+                                            Rp {{ number_format(request('max_price'), 0, ',', '.') }}
+                                        @else
+                                            Rp 10.000.000
+                                        @endif
+                                    </span>
+                                </div>
+                                <input type="range" name="max_price" id="sidebarPriceSlider" min="50000" max="10000000" step="50000"
+                                    value="{{ request('max_price') && (float) request('max_price') < 10000000 ? request('max_price') : 10000000 }}"
+                                    class="w-full h-1.5 bg-gray-200 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer accent-[#0194F3]">
+                                <div class="flex justify-between text-[10px] text-gray-400 mt-1">
+                                    <span>Rp 50rb</span>
+                                    <span>Rp 10jt</span>
+                                </div>
+                            </div>
+
+                            {{-- Tombol Aksi Submit --}}
+                            <div class="pt-2 space-y-2">
+                                <button type="submit"
+                                    class="w-full inline-flex items-center justify-center gap-2 bg-[#0194F3] hover:bg-[#0064D2] text-white py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm shadow-sm transition-all cursor-pointer">
+                                    <i data-lucide="search" class="w-4 h-4"></i>
+                                    <span>Terapkan Filter</span>
+                                </button>
+
+                                @if(request()->hasAny(['keyword', 'category_id', 'category', 'facility_id', 'facility', 'max_price', 'min_price']))
+                                    <a href="{{ route('accommodationlanding.semua') }}"
+                                        class="w-full inline-flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 py-2.5 px-4 rounded-xl font-bold text-xs transition-colors border border-gray-200 dark:border-gray-600">
+                                        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                                        <span>Reset Semua</span>
+                                    </a>
+                                @endif
+                            </div>
+                        </form>
+                    </div>
+                </aside>
+
+                {{-- ==================== AREA UTAMA: DAFTAR PENGINAPAN (KANAN) ==================== --}}
+                <main class="flex-1 min-w-0 w-full">
+
+                    {{-- Bar Ringkasan / Filter Aktif --}}
+                    @if(request()->hasAny(['keyword', 'category_id', 'category', 'facility_id', 'facility', 'max_price', 'min_price']))
+                        @php
+                            $activeCat = null;
+                            if (isset($categories)) {
+                                if (request('category_id')) {
+                                    $activeCat = $categories->firstWhere('id', request('category_id'));
+                                } elseif (request('category')) {
+                                    $activeCat = $categories->firstWhere('slug', request('category'));
+                                }
+                            }
+                            $activeFac = null;
+                            if (isset($facilities)) {
+                                if (request('facility_id')) {
+                                    $activeFac = $facilities->firstWhere('id', request('facility_id'));
+                                } elseif (request('facility')) {
+                                    $activeFac = $facilities->firstWhere('name', request('facility'));
+                                }
+                            }
+                        @endphp
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-4 mb-5 border border-gray-200 dark:border-gray-700 flex flex-wrap items-center justify-between gap-3 text-xs shadow-sm">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wide">Filter Aktif:</span>
+                                @if(request('keyword'))
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#E6F4FF] dark:bg-[#0194F3]/20 text-[#0194F3] dark:text-[#33ADFF] font-bold border border-[#B3E0FF] dark:border-[#0194F3]/30">
+                                        "{{ request('keyword') }}"
+                                    </span>
+                                @endif
+                                @if($activeCat)
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#E6F4FF] dark:bg-[#0194F3]/20 text-[#0194F3] dark:text-[#33ADFF] font-bold border border-[#B3E0FF] dark:border-[#0194F3]/30">
+                                        {{ $activeCat->name }}
+                                    </span>
+                                @endif
+                                @if($activeFac)
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#E6F4FF] dark:bg-[#0194F3]/20 text-[#0194F3] dark:text-[#33ADFF] font-bold border border-[#B3E0FF] dark:border-[#0194F3]/30">
+                                        {{ $activeFac->name }}
+                                    </span>
+                                @endif
+                                @if(request('max_price') && (float) request('max_price') < 10000000 && (float) request('max_price') > 50000)
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#E6F4FF] dark:bg-[#0194F3]/20 text-[#0194F3] dark:text-[#33ADFF] font-bold border border-[#B3E0FF] dark:border-[#0194F3]/30">
+                                        Maks Rp {{ number_format(request('max_price'), 0, ',', '.') }}
+                                    </span>
+                                @endif
+                            </div>
+                            <span class="text-xs font-semibold text-gray-500 dark:text-gray-400">
+                                Ditemukan <strong class="text-[#0F294D] dark:text-white">{{ $accommodations->total() }}</strong> penginapan
+                            </span>
+                        </div>
+                    @endif
+
+                    {{-- ===================== GRID KARTU PENGINAPAN ===================== --}}
+                    @if($accommodations->count() > 0)
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5" id="accommodationGrid">
+                            @foreach($accommodations as $accommodation)
+                                @php
+                                    $statusColors = [
+                                        'Available' => ['bg-[#00DD73]', 'Tersedia'],
+                                        'Full' => ['bg-red-500', 'Tidak Tersedia'],
+                                        'Maintenance' => ['bg-yellow-500', 'Maintenance'],
+                                    ];
+                                    $status = $statusColors[$accommodation->status] ?? ['bg-gray-500', $accommodation->status];
+                                    $isAvailable = $accommodation->status === 'Available';
+
+                                    // Review & Rating
+                                    if (isset($accommodation->avg_rating) || isset($accommodation->total_ratings)) {
+                                        $avgRating = round($accommodation->avg_rating ?? 0, 1);
+                                        $reviewCount = $accommodation->total_ratings ?? 0;
+                                    } elseif ($accommodation->relationLoaded('ratings')) {
+                                        $avgRating = $accommodation->ratings->count() ? round($accommodation->ratings->avg('bintang'), 1) : 0;
+                                        $reviewCount = $accommodation->ratings->count();
+                                    } else {
+                                        $avgRating = round($accommodation->ratings()->avg('bintang') ?? 0, 1);
+                                        $reviewCount = $accommodation->ratings()->count();
+                                    }
+
+                                    // Fasilitas
+                                    $facilitiesData = $accommodation->relationLoaded('facilities')
+                                        ? $accommodation->facilities
+                                        : $accommodation->facilities()->get();
+
+                                    $categoryName = $accommodation->category->name ?? 'Penginapan';
+                                @endphp
+
+                                @if($isAvailable)
+                                    {{-- Card klikable menuju detail --}}
+                                    <a href="{{ route('accommodationlanding.detail', $accommodation->slug) }}"
+                                        class="accommodation-card reveal-on-scroll bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:border-[#0194F3] group flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0194F3]"
+                                        data-price="{{ $accommodation->price }}">
+
+                                        {{-- BAGIAN GAMBAR --}}
+                                        <div class="relative overflow-hidden flex-shrink-0 bg-gray-100 dark:bg-gray-700">
+                                            @if(!empty($accommodation->thumbnail))
+                                                <img src="{{ asset($accommodation->thumbnail) }}" alt="{{ $accommodation->title }}"
+                                                    class="w-full h-40 sm:h-44 object-cover group-hover:scale-105 transition-transform duration-500">
+                                            @else
+                                                <img src="{{ asset('landingpage/kamar.jpg') }}" alt="{{ $accommodation->title }}"
+                                                    class="w-full h-40 sm:h-44 object-cover group-hover:scale-105 transition-transform duration-500">
+                                            @endif
+
+                                            {{-- Gradient overlay halus di bawah gambar --}}
+                                            <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
+
+                                            {{-- Badge Kiri Atas: Dilihat / View Counter --}}
+                                            <div class="absolute top-2.5 left-2.5 inline-flex items-center gap-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md px-2 py-0.5 rounded-md text-[10px] font-bold text-gray-700 dark:text-gray-200 shadow-sm border border-white/50">
+                                                <i data-lucide="eye" class="w-3 h-3 text-[#0194F3]"></i>
+                                                <span>{{ $accommodation->views ?? (($accommodation->id % 4) + 1) }} KALI</span>
+                                            </div>
+
+                                            {{-- Badge Kanan Atas: Status (Tersedia hijau) --}}
+                                            <span class="absolute top-2.5 right-2.5 {{ $status[0] }} text-white px-2 py-0.5 rounded-md text-[10px] font-bold uppercase shadow-sm tracking-wide">
+                                                {{ $status[1] }}
+                                            </span>
+
+                                            {{-- Badge Kiri Bawah: Kategori (Pill biru) --}}
+                                            <span class="absolute bottom-2.5 left-2.5 bg-[#0194F3] text-white text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-md shadow-sm">
+                                                {{ $categoryName }}
+                                            </span>
+                                        </div>
+
+                                        {{-- BAGIAN KONTEN KARTU --}}
+                                        <div class="p-3.5 sm:p-4 flex flex-col flex-1">
+                                            {{-- Judul Penginapan --}}
+                                            <h3 class="font-bold text-[#0F294D] dark:text-white text-sm sm:text-base mb-1 truncate group-hover:text-[#0194F3] transition-colors" title="{{ $accommodation->title }}">
+                                                {{ $accommodation->title }}
+                                            </h3>
+
+                                            {{-- Lokasi / Alamat --}}
+                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mb-2.5 flex items-center gap-1 truncate" title="{{ $accommodation->address }}">
+                                                <i data-lucide="map-pin" class="w-3 h-3 text-gray-400 flex-shrink-0"></i>
+                                                <span class="truncate">{{ Str::limit($accommodation->address, 30) }}</span>
+                                            </p>
+
+                                            {{-- Ikon Fasilitas --}}
+                                            <div class="flex items-center gap-1.5 mb-3 flex-wrap min-h-[26px]">
+                                                @if($facilitiesData->count() > 0)
+                                                    @foreach($facilitiesData->take(5) as $facility)
+                                                        <div class="inline-flex items-center justify-center w-6 h-6 bg-gray-50 dark:bg-gray-700/60 rounded-md border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300" title="{{ $facility->name }}">
+                                                            @php
+                                                                $iconRaw = $facility->icon;
+                                                                $iconLucide = $iconRaw && preg_match('/^[a-z0-9-]+$/i', $iconRaw);
+                                                                $iconSvg = $iconRaw && (Str::startsWith($iconRaw, ['M', 'm']) || Str::startsWith($iconRaw, '<'));
+                                                                $iconEmoji = $iconRaw && !$iconLucide && !$iconSvg;
+                                                            @endphp
+
+                                                            @if($iconLucide)
+                                                                <i data-lucide="{{ $iconRaw }}" class="w-3 h-3"></i>
+                                                            @elseif($iconSvg)
+                                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $iconRaw }}" />
+                                                                </svg>
+                                                            @elseif($iconEmoji)
+                                                                <span class="text-[10px] leading-none">{{ $iconRaw }}</span>
+                                                            @else
+                                                                <i data-lucide="check" class="w-3 h-3"></i>
+                                                            @endif
+                                                        </div>
+                                                    @endforeach
+
+                                                    @if($facilitiesData->count() > 5)
+                                                        <div class="inline-flex items-center justify-center px-1.5 h-6 bg-gray-100 dark:bg-gray-700 rounded-md text-[9px] font-bold text-gray-500 dark:text-gray-400" title="Dan fasilitas lainnya">
+                                                            +{{ $facilitiesData->count() - 5 }}
+                                                        </div>
+                                                    @endif
                                                 @else
-                                                    <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                                    <span class="text-[10px] text-gray-400 dark:text-gray-500 italic">Fasilitas standar</span>
                                                 @endif
                                             </div>
-                                        @endforeach
 
-                                        @if($facilitiesData->count() > 5)
-                                            <div class="inline-flex items-center justify-center px-1.5 h-7 bg-gray-200 dark:bg-gray-700 rounded-sm text-[10px] font-bold text-gray-600 dark:text-gray-300" title="Fasilitas lainnya">
-                                                +{{ $facilitiesData->count() - 5 }}
+                                            {{-- Harga (tanpa tombol) --}}
+                                            <div class="mt-auto pt-2.5 border-t border-gray-100 dark:border-gray-700">
+                                                <div class="flex items-baseline gap-1">
+                                                    <span class="text-[#0194F3] font-extrabold text-base sm:text-lg">
+                                                        Rp {{ number_format($accommodation->price, 0, ',', '.') }}
+                                                    </span>
+                                                    <span class="text-gray-400 dark:text-gray-500 text-[11px]">/malam</span>
+                                                </div>
                                             </div>
-                                        @endif
-                                    @else
-                                        <span class="text-[10px] text-gray-400 dark:text-gray-500 italic">Tidak ada fasilitas</span>
-                                    @endif
-                                </div>
+                                        </div>
+                                    </a>
+                                @else
+                                    {{-- Card tidak tersedia (tidak klikable) --}}
+                                    <div class="accommodation-card reveal-on-scroll bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col opacity-80 cursor-not-allowed"
+                                        data-price="{{ $accommodation->price }}">
 
-                                {{-- HARGA & TOMBOL --}}
-                                <div class="mt-auto border-t border-gray-200 dark:border-gray-700 pt-3">
-                                    <div class="flex items-baseline gap-1 mb-3">
-                                        <span class="text-[#0194F3] font-bold text-lg">Rp {{ number_format($accommodation->price, 0, ',', '.') }}</span>
-                                        <span class="text-gray-500 dark:text-gray-400 text-xs font-bold">/malam</span>
+                                        {{-- BAGIAN GAMBAR --}}
+                                        <div class="relative overflow-hidden flex-shrink-0 bg-gray-100 dark:bg-gray-700">
+                                            @if(!empty($accommodation->thumbnail))
+                                                <img src="{{ asset($accommodation->thumbnail) }}" alt="{{ $accommodation->title }}"
+                                                    class="w-full h-40 sm:h-44 object-cover grayscale">
+                                            @else
+                                                <img src="{{ asset('landingpage/kamar.jpg') }}" alt="{{ $accommodation->title }}"
+                                                    class="w-full h-40 sm:h-44 object-cover grayscale">
+                                            @endif
+
+                                            <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
+
+                                            <div class="absolute top-2.5 left-2.5 inline-flex items-center gap-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md px-2 py-0.5 rounded-md text-[10px] font-bold text-gray-700 dark:text-gray-200 shadow-sm border border-white/50">
+                                                <i data-lucide="eye" class="w-3 h-3 text-[#0194F3]"></i>
+                                                <span>{{ $accommodation->views ?? (($accommodation->id % 4) + 1) }} KALI</span>
+                                            </div>
+
+                                            <span class="absolute top-2.5 right-2.5 {{ $status[0] }} text-white px-2 py-0.5 rounded-md text-[10px] font-bold uppercase shadow-sm tracking-wide">
+                                                {{ $status[1] }}
+                                            </span>
+
+                                            <span class="absolute bottom-2.5 left-2.5 bg-[#0194F3] text-white text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-md shadow-sm">
+                                                {{ $categoryName }}
+                                            </span>
+                                        </div>
+
+                                        <div class="p-3.5 sm:p-4 flex flex-col flex-1">
+                                            <h3 class="font-bold text-[#0F294D] dark:text-white text-sm sm:text-base mb-1 truncate" title="{{ $accommodation->title }}">
+                                                {{ $accommodation->title }}
+                                            </h3>
+
+                                            <p class="text-gray-500 dark:text-gray-400 text-[11px] mb-2.5 flex items-center gap-1 truncate" title="{{ $accommodation->address }}">
+                                                <i data-lucide="map-pin" class="w-3 h-3 text-gray-400 flex-shrink-0"></i>
+                                                <span class="truncate">{{ Str::limit($accommodation->address, 30) }}</span>
+                                            </p>
+
+                                            <div class="flex items-center gap-1.5 mb-3 flex-wrap min-h-[26px]">
+                                                @if($facilitiesData->count() > 0)
+                                                    @foreach($facilitiesData->take(5) as $facility)
+                                                        <div class="inline-flex items-center justify-center w-6 h-6 bg-gray-50 dark:bg-gray-700/60 rounded-md border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300" title="{{ $facility->name }}">
+                                                            @php
+                                                                $iconRaw = $facility->icon;
+                                                                $iconLucide = $iconRaw && preg_match('/^[a-z0-9-]+$/i', $iconRaw);
+                                                                $iconSvg = $iconRaw && (Str::startsWith($iconRaw, ['M', 'm']) || Str::startsWith($iconRaw, '<'));
+                                                                $iconEmoji = $iconRaw && !$iconLucide && !$iconSvg;
+                                                            @endphp
+
+                                                            @if($iconLucide)
+                                                                <i data-lucide="{{ $iconRaw }}" class="w-3 h-3"></i>
+                                                            @elseif($iconSvg)
+                                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $iconRaw }}" />
+                                                                </svg>
+                                                            @elseif($iconEmoji)
+                                                                <span class="text-[10px] leading-none">{{ $iconRaw }}</span>
+                                                            @else
+                                                                <i data-lucide="check" class="w-3 h-3"></i>
+                                                            @endif
+                                                        </div>
+                                                    @endforeach
+
+                                                    @if($facilitiesData->count() > 5)
+                                                        <div class="inline-flex items-center justify-center px-1.5 h-6 bg-gray-100 dark:bg-gray-700 rounded-md text-[9px] font-bold text-gray-500 dark:text-gray-400" title="Dan fasilitas lainnya">
+                                                            +{{ $facilitiesData->count() - 5 }}
+                                                        </div>
+                                                    @endif
+                                                @else
+                                                    <span class="text-[10px] text-gray-400 dark:text-gray-500 italic">Fasilitas standar</span>
+                                                @endif
+                                            </div>
+
+                                            <div class="mt-auto pt-2.5 border-t border-gray-100 dark:border-gray-700">
+                                                <div class="flex items-baseline gap-1">
+                                                    <span class="text-[#0194F3] font-extrabold text-base sm:text-lg">
+                                                        Rp {{ number_format($accommodation->price, 0, ',', '.') }}
+                                                    </span>
+                                                    <span class="text-gray-400 dark:text-gray-500 text-[11px]">/malam</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-
-                                    @if($isAvailable)
-                                        <a href="{{ route('accommodationlanding.detail', $accommodation->slug) }}"
-                                            class="block w-full text-center bg-[#0194F3] text-white py-2 rounded-sm hover:bg-[#0064D2] transition-colors text-xs font-bold uppercase tracking-wide">
-                                            Lihat Detail
-                                        </a>
-                                    @else
-                                        <button disabled class="block w-full text-center bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 py-2 rounded-sm cursor-not-allowed text-xs font-bold uppercase tracking-wide border border-gray-300 dark:border-gray-600">
-                                            Tidak Tersedia
-                                        </button>
-                                    @endif
-                                </div>
-                            </div>
+                                @endif
+                            @endforeach
                         </div>
-                    @endforeach
-                </div>
 
-                {{-- ===================== PAGINATION ===================== --}}
-                @if($accommodations->hasPages())
-                    <div class="reveal-on-scroll mt-10 sm:mt-14 flex justify-center">
-                        {{ $accommodations->links() }}
-                    </div>
-                @endif
-            @else
-                {{-- ===================== EMPTY STATE ===================== --}}
-                <div class="reveal-on-scroll text-center py-16 sm:py-20 bg-white dark:bg-gray-800 rounded-md shadow-sm border border-gray-300 dark:border-gray-600">
-                    <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 rounded-sm bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
-                        <i data-lucide="search-x" class="w-8 h-8 sm:w-10 sm:h-10 text-gray-400"></i>
-                    </div>
-
-                    @if(request()->hasAny(['keyword', 'category_id', 'category', 'facility_id', 'facility', 'max_price', 'min_price']))
-                        <h3 class="text-lg font-bold text-[#0F294D] dark:text-white mb-2 uppercase tracking-wide">Penginapan Tidak Ditemukan</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 max-w-md mx-auto mb-6 px-4">
-                            Tidak ada penginapan yang cocok dengan kriteria pencarian Anda. Silakan coba ubah kata kunci atau reset filter.
-                        </p>
-                        <a href="{{ route('accommodationlanding.semua') }}"
-                            class="inline-flex items-center gap-2 bg-[#0194F3] text-white px-5 py-2 rounded-sm font-bold text-xs uppercase tracking-wide hover:bg-[#0064D2] transition-all shadow-sm">
-                            <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reset Filter Pencarian
-                        </a>
+                        {{-- ===================== PAGINATION ===================== --}}
+                        @if($accommodations->hasPages())
+                            <div class="reveal-on-scroll mt-8 sm:mt-10 flex justify-end">
+                                {{ $accommodations->links() }}
+                            </div>
+                        @endif
                     @else
-                        <h3 class="text-lg font-bold text-[#0F294D] dark:text-white mb-2 uppercase tracking-wide">Belum Ada Penginapan</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 max-w-md mx-auto mb-6 px-4">
-                            Saat ini belum ada penginapan yang tersedia. Silakan periksa kembali nanti.
-                        </p>
-                        <a href="{{ route('landingpage') }}"
-                            class="inline-flex items-center gap-2 bg-[#0194F3] text-white px-5 py-2 rounded-sm font-bold text-xs uppercase tracking-wide hover:bg-[#0064D2] transition-all shadow-sm">
-                            <i data-lucide="home" class="w-4 h-4"></i> Kembali ke Beranda
-                        </a>
+                        {{-- ===================== EMPTY STATE ===================== --}}
+                        <div class="reveal-on-scroll text-center py-16 sm:py-20 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
+                            <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 rounded-2xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-[#0194F3]">
+                                <i data-lucide="search-x" class="w-8 h-8 sm:w-10 sm:h-10"></i>
+                            </div>
+
+                            @if(request()->hasAny(['keyword', 'category_id', 'category', 'facility_id', 'facility', 'max_price', 'min_price']))
+                                <h3 class="text-lg font-bold text-[#0F294D] dark:text-white mb-2">Penginapan Tidak Ditemukan</h3>
+                                <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 max-w-md mx-auto mb-6 px-4">
+                                    Tidak ada penginapan yang cocok dengan kriteria filter pencarian Anda. Silakan ubah filter atau kata kunci.
+                                </p>
+                                <a href="{{ route('accommodationlanding.semua') }}"
+                                    class="inline-flex items-center gap-2 bg-[#0194F3] text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wide hover:bg-[#0064D2] transition-all shadow-sm">
+                                    <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                                    <span>Reset Filter Pencarian</span>
+                                </a>
+                            @else
+                                <h3 class="text-lg font-bold text-[#0F294D] dark:text-white mb-2">Belum Ada Penginapan</h3>
+                                <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 max-w-md mx-auto mb-6 px-4">
+                                    Saat ini belum ada data penginapan yang tersedia. Silakan cek kembali nanti.
+                                </p>
+                                <a href="{{ route('landingpage') }}"
+                                    class="inline-flex items-center gap-2 bg-[#0194F3] text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wide hover:bg-[#0064D2] transition-all shadow-sm">
+                                    <i data-lucide="home" class="w-4 h-4"></i>
+                                    <span>Kembali ke Beranda</span>
+                                </a>
+                            @endif
+                        </div>
                     @endif
-                </div>
-            @endif
+                </main>
+
+            </div>
 
         </div>
     </section>
@@ -486,106 +565,53 @@
                     }, 300);
                 }
 
-                // ==================== SLIDER HARGA ====================
-                const pageSlider = document.getElementById('pagePriceSlider');
-                const pagePreview = document.getElementById('pagePricePreview');
-                if (pageSlider && pagePreview) {
-                    pageSlider.addEventListener('input', function() {
-                        const val = parseInt(this.value, 10);
-                        if (val >= 10000000) {
-                            pagePreview.textContent = 'Hingga 10 jt';
-                        } else if (val >= 1000000) {
-                            const jt = val / 1000000;
-                            pagePreview.textContent = 's/d ' + (jt % 1 === 0 ? jt : jt.toFixed(1)) + ' jt';
+                // ==================== MOBILE FILTER TOGGLE ====================
+                const mobileFilterToggle = document.getElementById('mobileFilterToggle');
+                const sidebarWrap = document.getElementById('sidebarFilterWrap');
+                const mobileFilterChevron = document.getElementById('mobileFilterChevron');
+
+                if (mobileFilterToggle && sidebarWrap) {
+                    mobileFilterToggle.addEventListener('click', function () {
+                        const isHidden = sidebarWrap.classList.contains('hidden');
+                        if (isHidden) {
+                            sidebarWrap.classList.remove('hidden');
+                            if (mobileFilterChevron) mobileFilterChevron.style.transform = 'rotate(180deg)';
                         } else {
-                            pagePreview.textContent = 's/d ' + (val / 1000) + ' rb';
+                            sidebarWrap.classList.add('hidden');
+                            if (mobileFilterChevron) mobileFilterChevron.style.transform = 'rotate(0deg)';
                         }
                     });
                 }
 
-                // ==================== CUSTOM DROPDOWNS (KATEGORI & FASILITAS) ====================
-                function setupPageDropdown(wrapId, triggerId, panelId, labelId, chevronId, selectId, optClass) {
-                    const wrap = document.getElementById(wrapId);
-                    const trigger = document.getElementById(triggerId);
-                    const panel = document.getElementById(panelId);
-                    const label = document.getElementById(labelId);
-                    const chevron = document.getElementById(chevronId);
-                    const nativeSelect = document.getElementById(selectId);
-                    const options = document.querySelectorAll('.' + optClass);
+                // ==================== SLIDER HARGA SIDEBAR ====================
+                const sidebarSlider = document.getElementById('sidebarPriceSlider');
+                const sidebarPreview = document.getElementById('sidebarPricePreview');
 
-                    if (wrap && trigger && panel) {
-                        // Toggle panel saat trigger diklik
-                        trigger.addEventListener('click', function (e) {
-                            e.stopPropagation();
-                            const isHidden = panel.classList.contains('hidden');
-
-                            // Tutup panel dropdown lain jika sedang terbuka
-                            ['heroCategoryPanelDesktop', 'heroFacilityPanelDesktop'].forEach(pId => {
-                                if (pId !== panelId) {
-                                    const otherP = document.getElementById(pId);
-                                    if (otherP) otherP.classList.add('hidden');
-                                }
-                            });
-                            ['heroCategoryChevronDesktop', 'heroFacilityChevronDesktop'].forEach(cId => {
-                                if (cId !== chevronId) {
-                                    const otherC = document.getElementById(cId);
-                                    if (otherC) otherC.style.transform = 'rotate(0deg)';
-                                }
-                            });
-
-                            panel.classList.toggle('hidden');
-                            if (chevron) {
-                                chevron.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
-                            }
-                            if (isHidden && window.lucide) {
-                                lucide.createIcons();
-                            }
-                        });
-
-                        // Handle pilihan opsi
-                        options.forEach(opt => {
-                            opt.addEventListener('click', function (e) {
-                                e.stopPropagation();
-                                const value = this.dataset.value;
-                                const textLabel = this.dataset.label;
-
-                                // Update label teks trigger
-                                if (label) label.textContent = textLabel;
-
-                                // Update hidden native select
-                                if (nativeSelect) {
-                                    nativeSelect.value = value;
-                                    nativeSelect.dispatchEvent(new Event('change'));
-                                }
-
-                                // Update visual tanda centang
-                                options.forEach(o => {
-                                    const icon = o.querySelector('.check-icon');
-                                    if (icon) icon.classList.add('opacity-0');
-                                    o.classList.remove('is-selected', 'bg-[#E6F4FF]', 'dark:bg-[#0194F3]/20');
-                                });
-                                const activeIcon = this.querySelector('.check-icon');
-                                if (activeIcon) activeIcon.classList.remove('opacity-0');
-                                this.classList.add('is-selected', 'bg-[#E6F4FF]', 'dark:bg-[#0194F3]/20');
-
-                                // Tutup panel
-                                panel.classList.add('hidden');
-                                if (chevron) chevron.style.transform = 'rotate(0deg)';
-                            });
-                        });
-
-                        // Tutup dropdown jika klik di luar area
-                        document.addEventListener('click', function (e) {
-                            if (!wrap.contains(e.target)) {
-                                panel.classList.add('hidden');
-                                if (chevron) chevron.style.transform = 'rotate(0deg)';
-                            }
-                        });
-                    }
+                function formatRupiah(number) {
+                    return 'Rp ' + number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
                 }
 
-                setupPageDropdown('heroCategoryWrapDesktop', 'heroCategoryTriggerDesktop', 'heroCategoryPanelDesktop', 'heroCategoryLabelDesktop', 'heroCategoryChevronDesktop', 'heroCategoryDesktop', 'hero-cat-opt-desktop');
-                setupPageDropdown('heroFacilityWrapDesktop', 'heroFacilityTriggerDesktop', 'heroFacilityPanelDesktop', 'heroFacilityLabelDesktop', 'heroFacilityChevronDesktop', 'heroFacilityDesktop', 'hero-fac-opt-desktop');
+                if (sidebarSlider && sidebarPreview) {
+                    sidebarSlider.addEventListener('input', function() {
+                        const val = parseInt(this.value, 10);
+                        if (val >= 10000000) {
+                            sidebarPreview.textContent = 'Rp 10.000.000';
+                        } else {
+                            sidebarPreview.textContent = formatRupiah(val);
+                        }
+                    });
+                }
+
+                // ==================== AUTO SUBMIT RADIO PADA SIDEBAR (OPSIONAL/INSTAN) ====================
+                const sidebarForm = document.getElementById('sidebarFilterForm');
+                if (sidebarForm) {
+                    const radios = sidebarForm.querySelectorAll('input[type="radio"]');
+                    radios.forEach(radio => {
+                        radio.addEventListener('change', function () {
+                            sidebarForm.submit();
+                        });
+                    });
+                }
 
                 // ==================== REVEAL ON SCROLL ====================
                 const revealElements = document.querySelectorAll('.reveal-on-scroll');
@@ -595,17 +621,17 @@
                             if (entry.isIntersecting) {
                                 setTimeout(() => {
                                     entry.target.classList.add('is-visible');
-                                }, index * 60);
+                                }, index * 40);
                                 revealObserver.unobserve(entry.target);
                             }
                         });
-                    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+                    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
                     revealElements.forEach(el => revealObserver.observe(el));
                 } else {
                     revealElements.forEach(el => el.classList.add('is-visible'));
                 }
 
-                // Render Lucide Icons
+                // ==================== LUCIDE ICONS ====================
                 if (window.renderLucide) {
                     window.renderLucide();
                 } else if (window.lucide) {
